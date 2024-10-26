@@ -17,18 +17,18 @@ do
     #if not found
     if [[ -z $WINNER_ID ]]
     then
-      $($PSQL "INSERT INTO teams(name) VALUES ('$WINNER')");
+      echo $($PSQL "INSERT INTO teams(name) VALUES ('$WINNER')");
     fi
     
     OPPONENT_ID=$($PSQL "SELECT team_id from teams where name='$OPPONENT'");
     if [[ -z $OPPONENT_ID ]]
     then
-      $($PSQL "INSERT INTO teams(name) VALUES ('$OPPONENT')")
+      echo $($PSQL "INSERT INTO teams(name) VALUES ('$OPPONENT')")
     fi
 
       WINNER_ID=$($PSQL "SELECT team_id FROM teams where name='$WINNER'");
       OPPONENT_ID=$($PSQL "SELECT team_id from teams where name='$OPPONENT'");
-      $($PSQL "INSERT INTO games(winner_id, opponent_id, winner_goals, opponent_goals, year, round) VALUES ($WINNER_ID, $OPPONENT_ID, $WINNER_GOALS, $OPPONENT_GOALS, $YEAR, '$ROUND')")
+      echo $($PSQL "INSERT INTO games(winner_id, opponent_id, winner_goals, opponent_goals, year, round) VALUES ($WINNER_ID, $OPPONENT_ID, $WINNER_GOALS, $OPPONENT_GOALS, $YEAR, '$ROUND')")
   fi
 done
 
